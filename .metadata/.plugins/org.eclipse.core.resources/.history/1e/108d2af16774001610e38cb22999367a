@@ -1,0 +1,34 @@
+package localhost.googlemaps.directions;
+
+/**
+ * This is a simple class that makes a simple request to Google Maps Direction API
+ * 
+ * @author Kamaldeen Alabi
+ * @since 2016-09-06
+ *
+ */
+
+public class MapRequest {
+	
+	//This is the variable that stores the URL of the host API to connect to
+	protected static String hostapiurl = "https://maps.googleapis.com/maps/api/directions/";
+	
+	//This is the character set we will use to encode the URL parameters
+	protected static String charset = "UTF-8";
+	
+	//This is the variable that stores the API key to make the request to the Google Maps API
+	protected static String key = "AIzaSyAI-b0OwKFzq2tHeLht0JiYzgN2kF6k_l8";
+	
+	
+	/**
+	 * This is the main method in the class that will run the program to make the 
+	 * requests  to the Google Maps API and output the response
+	 */
+	
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,102 @@
+package localhost.googlemaps.directions;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
+/**
+ * This is a simple class that makes a simple request to Google Maps Direction API
+ * 
+ * @author Kamaldeen Alabi
+ * @since 2016-09-06
+ *
+ */
+
+public class MapRequest {
+	
+	//This is the variable that stores the URL of the host API to connect to
+	protected static String hostapiurl = "https://maps.googleapis.com/maps/api/directions/";
+	
+	//This is the character set we will use to encode the URL parameters
+	protected static String charset = "UTF-8";
+	
+	//This is the variable that stores the API key to make the request to the Google Maps API
+	protected static String key = "AIzaSyAI-b0OwKFzq2tHeLht0JiYzgN2kF6k_l8";
+	
+	
+	/**
+	 * This is the main method in the class that will run the program to make the 
+	 * requests  to the Google Maps API and output the response
+	 */
+	
+	public static void main(String[] args) {
+		
+		try {
+		
+		//This is the variable that stores the starting point for the directions
+		String startingPoint = "Elkridge, MD";
+		
+		//This is the variable that stores the ending point for the directions
+		String endingPoint = "Washington, DC";
+		
+		//This variable stores the type of mode for the directions
+		String mode = "bicycling";
+		
+		//This variable stores the waypoints for the directions
+		String waypoints = "Laurel, MA|Landover, MD";
+		
+		//This variable stores the routes to avoid for the directions
+		String avoid = "highways";
+		
+		//This is the variable that stores the return type either json or xml
+		String returnType = "json";
+		
+			//This is the variable that stores the query string to the API 
+			//and replaces the required information in the %s
+			String queryString = String.format("origin=%s&destination=%s&mode=%s&waypoints=%s&avoid=%s&key=%s",
+					URLEncoder.encode(startingPoint, charset),
+					URLEncoder.encode(endingPoint, charset),
+					URLEncoder.encode(mode, charset),
+					URLEncoder.encode(waypoints, charset),
+					URLEncoder.encode(avoid, charset),
+					URLEncoder.encode(key, charset));
+			
+			//The code below will create a new URL out of the endingPoint, returnType and queryString
+			URL googleDirections = new URL(hostapiurl + returnType + "?" + queryString);
+			HttpURLConnection connection = (HttpURLConnection)googleDirections.openConnection();
+			connection.setRequestMethod("GET");
+			
+			//The if statement below will throw an exception error if we do not get a 200 (success)
+			if (connection.getResponseCode() != 200) {
+				
+				throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseCode());
+			}
+			
+			//The response will be read into the buffer
+			BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+			
+			while (br.readLine() != null) {
+				
+				//This will print out the response lines to the screen
+				System.out.println(br.readLine());
+			}
+			
+			//This will disconnect the program from the API
+			connection.disconnect();
+			
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}//main method
+
+}//MapRequest class

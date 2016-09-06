@@ -1,0 +1,5 @@
+package localhost.googlemaps.directions;
+
+public class RestRequest {
+
+}
