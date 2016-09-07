@@ -1,0 +1,5 @@
+package localhost.sailsrestrequest.employees;
+
+public class DeleteEmployee {
+
+}

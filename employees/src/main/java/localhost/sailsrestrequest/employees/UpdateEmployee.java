@@ -1,0 +1,81 @@
+package localhost.sailsrestrequest.employees;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
+
+/**
+ * This class will connect to the Sails database and update the employee records.
+ * @author: Kamaldeen Alabi
+ * @since: 2016-09-07
+ */
+
+public class UpdateEmployee {
+	
+	/**
+	 * This is the variable that stores the URL the API will connect to
+	 */
+	protected static String endpoint = "http://localhost:1337/employee/";
+	
+	/**
+	 * This is the  character set the program will use for encoding URL parameters
+	 */
+	protected static String charset = "UTF-8";
+	
+	//This is the main method that will do the work for the program
+	public static void main(String[] args) {
+
+		try {
+			
+			//This is the variable to hold the ID number of the employee to be updated.
+			String id = "14";
+			
+			//This is the variable to hold the last name of the employee to be updated.
+			String lastName = "Robertson";
+			
+			//This is the variable to hold the employee's home phone.
+			String homePhone = "301-676-4545";
+			
+			//This is the query string that will collect the data stored in the variables and pass them to the API for querying.
+			String queryString = String.format("lastName=%s&homePhone=%s", 
+					URLEncoder.encode(lastName, charset),
+					URLEncoder.encode(homePhone, charset));
+			
+			//This will create a new URL out of the endpoint, returnType and queryString.
+			URL employeeRequests = new URL(endpoint + id + "?" + queryString);
+			HttpURLConnection connection = (HttpURLConnection) employeeRequests.openConnection();
+			connection.setRequestMethod("PUT");
+			
+			//if the program does not get a 200 (success) then it will throw an exception
+			if (connection.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseCode());
+			}
+			
+			//This will read the response into the buffer.
+			BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+			
+			//This will loop the data in the buffer line by line until there are no more lines and returns null.
+			while (br.readLine() != null) {
+				//This will print out each line to the screen.
+				System.out.println(br.readLine());
+			}
+			
+			//This will close the connection to API.
+			connection.disconnect();
+			
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}//main method
+
+}//UpdateEmployee class

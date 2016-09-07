@@ -1,0 +1,15 @@
+package localhost.sailsrestrequest.employees;
+
+public class EmployeeRequest {
+	
+	/**
+	 * This c
+	 * @param args
+	 */
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

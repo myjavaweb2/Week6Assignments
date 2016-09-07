@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;localhost.sailsrestrequest.employees.EmployeeRequest&apos; to &apos;CreateEmployee&apos;&#x0D;&#x0A;- Original project: &apos;employees&apos;&#x0D;&#x0A;- Original element: &apos;localhost.sailsrestrequest.employees.EmployeeRequest&apos;&#x0D;&#x0A;- Renamed element: &apos;localhost.sailsrestrequest.employees.CreateEmployee&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;EmployeeRequest&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;localhost.sailsrestrequest.employees{EmployeeRequest.java[EmployeeRequest" matchStrategy="1" name="CreateEmployee" qualified="false" references="true" similarDeclarations="false" stamp="1473270757250" textual="false" version="1.0"/>
+</session>
